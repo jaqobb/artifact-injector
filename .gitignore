@@ -1,6 +1,9 @@
-/.gradle/
-/.idea/
-/build/
-/out/
-/**/src/test/
-/*.iml
+.gradle/
+.idea/
+bin/
+out/
+build/
+*.iml
+.DS_Store
+.gradletasknamecache
+.java-version

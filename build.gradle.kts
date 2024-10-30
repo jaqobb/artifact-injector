@@ -1,70 +1,57 @@
-import com.jfrog.bintray.gradle.BintrayExtension
-
 plugins {
-	`java-library`
-	`maven-publish`
-	id("com.jfrog.bintray") version "1.8.4"
+    `java-library`
+    `maven-publish`
 }
 
 group = "dev.jaqobb"
-version = "2.2.7"
-description = "Java library that allows to inject dependencies without increasing final jar file size"
+version = "3.0.0"
+description = "Small, minimalistic, and easy-to-use Java library for injecting Maven-based artifacts without increasing the final JAR's size"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_11
-	targetCompatibility = JavaVersion.VERSION_11
-}
-
-defaultTasks("clean", "build", "sourcesJar", "bintrayUpload")
-
-tasks {
-	test {
-		useJUnitPlatform {
-			includeEngines("junit-jupiter")
-		}
-	}
-}
-
-task<Jar>("sourcesJar") {
-	from(sourceSets["main"].allSource)
-	archiveClassifier.set("sources")
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 repositories {
-	jcenter()
+    mavenCentral()
 }
 
 dependencies {
-	compileOnly("org.jetbrains:annotations:17.0.0")
-	testRuntime("org.junit.jupiter:junit-jupiter-engine:5.5.0")
-	testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.0")
+    testImplementation(platform("org.junit:junit-bom:5.11.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.awaitility:awaitility:4.2.2")
+}
+
+tasks.register<Jar>("sourcesJar") {
+    from(sourceSets["main"].allSource)
+    archiveClassifier.set("sources")
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
 }
 
 publishing {
-	publications {
-		create<MavenPublication>("maven") {
-			groupId = project.group as String
-			artifactId = project.name.toLowerCase()
-			version = project.version as String
-			from(components["java"])
-			artifact(tasks["sourcesJar"])
-		}
-	}
-}
-
-configure<BintrayExtension> {
-	user = properties["bintray-user"] as String?
-	key = properties["bintray-api-key"] as String?
-	publish = true
-	setPublications("maven")
-	pkg(closureOf<BintrayExtension.PackageConfig> {
-		repo = properties["bintray-repository"] as String?
-		name = project.name
-		desc = project.description
-		websiteUrl = "https://github.com/jaqobb/DependencyInjector"
-		issueTrackerUrl = "$websiteUrl/issues"
-		vcsUrl = "$websiteUrl.git"
-		setLicenses("MIT")
-		setLabels("java", "library", "dependency-injector")
-	})
+    repositories {
+        maven {
+            name = if (!project.version.toString().endsWith("SNAPSHOT")) "jaqobbRepositoryReleases" else "jaqobbRepositorySnapshots"
+            url = if (!project.version.toString().endsWith("SNAPSHOT")) uri("https://repository.jaqobb.dev/releases") else uri("https://repository.jaqobb.dev/snapshots")
+            credentials(PasswordCredentials::class)
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+            from(components["java"])
+            artifact(tasks["sourcesJar"])
+        }
+    }
 }

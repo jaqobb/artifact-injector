@@ -5,49 +5,53 @@ Small, minimalistic, and easy-to-use Java library for injecting Maven-based arti
 ## Adding to your project
 
 ### Maven
+
 ```xml
+
 <repositories>
-    <repository>
-        <id>jaqobb-repository-releases</id>
-        <name>jaqobb Repository</name>
-        <url>https://repository.jaqobb.dev/releases</url>
-    </repository>
+  <repository>
+    <id>jaqobb-repository-releases</id>
+    <name>jaqobb Repository</name>
+    <url>https://repository.jaqobb.dev/releases</url>
+  </repository>
 </repositories>
 
 <dependencies>
-    <dependency>
-        <groupId>dev.jaqobb</groupId>
-        <artifactId>artifact-injector</artifactId>
-        <version>3.0.0</version>
-    </dependency>
+<dependency>
+  <groupId>dev.jaqobb</groupId>
+  <artifactId>artifact-injector</artifactId>
+  <version>3.0.1</version>
+</dependency>
 </dependencies>
 ```
 
 ### Gradle (Kotlin)
+
 ```kotlin
 repositories {
-    maven {
-        name = "jaqobbRepositoryReleases"
-        url = uri("https://repository.jaqobb.dev/releases")
-    }
+  maven {
+    name = "jaqobbRepositoryReleases"
+    url = uri("https://repository.jaqobb.dev/releases")
+  }
 }
 
 dependencies {
-    implementation("dev.jaqobb:artifact-injector:3.0.0")   
+  implementation("dev.jaqobb:artifact-injector:3.0.1")
 }
 ```
 
 ### Gradle (Groovy)
+
 ```groovy
 repositories {
-    maven {
-        name "jaqobbRepositoryReleases"
-        url "https://repository.jaqobb.dev/releases"
-    }
+  maven {
+    name "jaqobbRepositoryReleases"
+    url "https://repository.jaqobb.dev/releases"
+  }
 }
 
 dependencies {
-    implementation "dev.jaqobb:artifact-injector:3.0.0"
+  implementation "dev.jaqobb:artifact-injector:3.0.1"
 }
 ```
 
@@ -95,7 +99,8 @@ If, at any point, the library encounters an error, it will throw one of these ex
 
 Starting from Java 9, the use of reflection to access private methods, such as `URLClassLoader#addURL` that this library uses, is restricted due to the module system and stronger encapsulation.
 
-To allow the use of reflection, you need to add the following JVM arguments to open the required packages within the `java.base` module to reflection:   
+To allow the use of reflection, you need to add the following JVM arguments to open the required packages within the `java.base` module to reflection:
+
 ```shell
 --add-opens java.base/java.net=ALL-UNNAMED
 --add-opens java.base/java.lang=ALL-UNNAMED

@@ -61,10 +61,10 @@ public class Dependency {
   }
 
   public URL getDownloadURL(String repository) throws MalformedURLException {
-    String filePath = this.groupId.replace(".", "/") + "/" + this.artifactId + "/" + this.version;
-    String fileName = this.artifactId + "-" + this.version + ".jar";
-    String baseURL = repository.endsWith("/") ? repository : repository + "/";
-    return new URL(baseURL + filePath + "/" + fileName);
+    String fixedRepository = repository.endsWith("/") ? repository : repository + "/";
+    String artifactFilePath = this.groupId.replace(".", "/") + "/" + this.artifactId + "/" + this.version;
+    String artifactFileName = this.artifactId + "-" + this.version + ".jar";
+    return new URL(fixedRepository + artifactFilePath + "/" + artifactFileName);
   }
 
   public void inject(String repository, URLClassLoader classLoader, File dependenciesDirectory) {

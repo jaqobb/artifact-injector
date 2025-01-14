@@ -20,7 +20,7 @@ Small, minimalistic, and easy-to-use Java library for injecting Maven-based arti
 <dependency>
   <groupId>dev.jaqobb</groupId>
   <artifactId>artifact-injector</artifactId>
-  <version>3.0.1</version>
+  <version>3.0.2</version>
 </dependency>
 </dependencies>
 ```
@@ -36,7 +36,7 @@ repositories {
 }
 
 dependencies {
-  implementation("dev.jaqobb:artifact-injector:3.0.1")
+  implementation("dev.jaqobb:artifact-injector:3.0.2")
 }
 ```
 
@@ -51,7 +51,7 @@ repositories {
 }
 
 dependencies {
-  implementation "dev.jaqobb:artifact-injector:3.0.1"
+  implementation "dev.jaqobb:artifact-injector:3.0.2"
 }
 ```
 

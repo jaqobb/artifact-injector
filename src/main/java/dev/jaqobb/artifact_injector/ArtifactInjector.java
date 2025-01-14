@@ -41,9 +41,6 @@ public class ArtifactInjector {
     if (dependency == null) {
       throw new NullPointerException("dependency");
     }
-    if (repository == null) {
-      throw new NullPointerException("repository");
-    }
     dependency.inject(repository, classLoader, this.dependenciesDirectory);
   }
 }

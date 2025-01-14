@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.jaqobb"
-version = "3.0.1"
+version = "3.0.2"
 description = "Small, minimalistic, and easy-to-use Java library for injecting Maven-based artifacts without increasing the final JAR's size"
 
 java {

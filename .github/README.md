@@ -7,7 +7,6 @@ Small, minimalistic, and easy-to-use Java library for injecting Maven-based arti
 ### Maven
 
 ```xml
-
 <repositories>
   <repository>
     <id>jaqobb-repository-releases</id>
@@ -17,11 +16,11 @@ Small, minimalistic, and easy-to-use Java library for injecting Maven-based arti
 </repositories>
 
 <dependencies>
-<dependency>
-  <groupId>dev.jaqobb</groupId>
-  <artifactId>artifact-injector</artifactId>
-  <version>3.0.2</version>
-</dependency>
+  <dependency>
+    <groupId>dev.jaqobb</groupId>
+    <artifactId>artifact-injector</artifactId>
+    <version>3.0.2</version>
+  </dependency>
 </dependencies>
 ```
 
@@ -87,7 +86,7 @@ artifactInjector.inject(dependency, repository, classLoader);
 
 The `dependency` parameter is an instance of the `Dependency` class that represents the information about the dependency you want to inject. You can also use the `groupId`, `artifactId`, and `version` parameters instead if you so prefer. If you use the `groupId`, `artifactId`, and `version` parameters, the library will simply create a new `Dependency` instance for you.
 
-The `repository` parameter is optional and represents the URL of the repository where the dependency is located. The library offers a set of predefined repositories that you can use without worrying about their URL. You can get them from the `Repositories` class. If you want to add a repository, please make an issue or a pull request.
+The `repository` parameter is optional and represents the URL of the repository where the dependency is located. The library offers a set of predefined repositories that you can use without worrying about their URL. You can get them from the `Repositories` class. If you want to add a repository, please make an issue, or a pull request.
 
 The `classLoader` parameter is required and represents the `URLClassLoader` instance to which the dependency will be injected.
 
